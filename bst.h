@@ -322,7 +322,8 @@ bool
 BinarySearchTree<Key, Value>::iterator::operator!=(
     const BinarySearchTree<Key, Value>::iterator& rhs) const
 {
-  return !operator==(rhs);
+  return !(current_ -> getKey() == rhs.current_ -> getKey()) && (current_ -> getValue() == rhs.current_ -> getValue());
+  // return !operator==(rhs);
     // TODO
 
 }
@@ -569,6 +570,7 @@ BinarySearchTree<Key, Value>::getSmallestNode() const
     }
     return curr;
   }
+  return nullptr;
 }
 
 /**
