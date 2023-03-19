@@ -43,5 +43,6 @@ bool equalPaths(Node * root)
   } else if (numOfChildren(root) == 0) {
     return true;
   }
+  return true;
 }
 
