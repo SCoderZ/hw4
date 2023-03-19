@@ -500,12 +500,21 @@ void BinarySearchTree<Key, Value>::remove(const Key& key)
             curr -> getParent() -> setRight(nullptr);
           }
           delete curr;
-        }
+        } else if (curr -> getLeft() == nullptr && curr -> getRight() != nullptr) {
+          nodeSwap(curr, curr -> getRight());
+          delete curr;
+        } else if (curr -> getLeft() == nullptr && curr -> getRight() != nullptr) {
+          nodeSwap(curr, curr -> getLeft());
+          delete curr;
+        } else {
+        delete curr;
+      }
+
       } else if (curr -> getKey() < key) {
-      curr = curr -> getLeft();
-    } else {
-      curr = curr -> getRight();
-    }
+        curr = curr -> getLeft();
+      } else {
+        curr = curr -> getRight();
+      }
     }
 
   }
