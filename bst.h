@@ -312,7 +312,15 @@ bool
 BinarySearchTree<Key, Value>::iterator::operator==(
     const BinarySearchTree<Key, Value>::iterator& rhs) const
 {
-  return (current_ -> getKey() == rhs.current_ -> getKey()) && (current_ -> getValue() == rhs.current_ -> getValue());
+  if (current_ == nullptr && rhs.current_ == nullptr) {
+    return true;
+  } else if (current_ == nullptr && rhs.current_ != nullptr) {
+    return false;
+  } else if (current_ != nullptr && rhs.current_ == nullptr) {
+    return false;
+  } else {
+    return (current_ -> getKey() == rhs.current_ -> getKey()) && (current_ -> getValue() == rhs.current_ -> getValue());
+  }
     // TODO
 }
 
@@ -325,8 +333,7 @@ bool
 BinarySearchTree<Key, Value>::iterator::operator!=(
     const BinarySearchTree<Key, Value>::iterator& rhs) const
 {
-  return !(current_ -> getKey() == rhs.current_ -> getKey()) && (current_ -> getValue() == rhs.current_ -> getValue());
-  // return !operator==(rhs);
+  return !operator==(rhs);
     // TODO
 
 }
