@@ -599,7 +599,7 @@ int height(Node<Key, Value> * node) {
     n++;
     node = node -> getParent();
   } */
-  return 1 + max(height(node -> getLeft()), height(node -> getRight()));
+  return 1 + std::max(height(node -> getLeft()), height(node -> getRight()));
 }
 
 template<typename Key, typename Value>
