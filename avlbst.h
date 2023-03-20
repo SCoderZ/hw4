@@ -391,11 +391,11 @@ template<class Key, class Value>
 void AVLTree<Key, Value>:: remove(const Key& key)
 {
   if (!(this -> empty())) {
-    AVLNode<Key, Value>* curr = static_cast<AVLNode<Key, Value>>(this -> root_);
+    AVLNode<Key, Value>* curr = static_cast<AVLNode<Key, Value>*>(this -> root_);
     while (curr != nullptr) {
       if (curr -> getKey() == key) {
         if (curr -> getLeft() != nullptr && curr -> getRight() != nullptr) {
-          AVLNode<Key, Value>* pred = this -> predecessor(curr);
+          AVLNode<Key, Value>* pred = static_cast<AVLNode<Key, Value>*>(this -> predecessor(curr));
           nodeSwap(curr, pred);
           AVLNode<Key, Value>* child = curr -> getLeft();
           AVLNode<Key, Value>* parent = curr -> getParent();
