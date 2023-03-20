@@ -288,6 +288,15 @@ void AVLTree<Key, Value>::rotateRight (AVLNode<Key, Value>* z)  // z must have a
 
   y -> setRight(z);
   y -> setParent(z -> getParent());
+
+  if (z -> getParent() != nullptr) {
+    if (!isRightChild(z)) {
+      z -> getParent() -> setLeft(y);
+    } else {
+      z -> getParent() -> setRight(y);
+    }
+  }
+
   z -> setParent(y);
 
   z -> setLeft(c);
@@ -308,6 +317,15 @@ void AVLTree<Key, Value>::rotateLeft (AVLNode<Key, Value>* z) // n must have a p
 
   y -> setLeft(z);
   y -> setParent(z -> getParent());
+
+  if (z -> getParent() != nullptr) {
+    if (!isRightChild(z)) {
+      z -> getParent() -> setLeft(y);
+    } else {
+      z -> getParent() -> setRight(y);
+    }
+  }
+
   z -> setParent(y);
 
   z -> setRight(c);

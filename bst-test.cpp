@@ -13,11 +13,11 @@ int main(int argc, char *argv[])
 
   AVLTree<uint16_t, uint16_t> testTree;
 
-  testTree.insert(std::make_pair(0, 9));
+  testTree.insert(std::make_pair(2, 9));
   testTree.print();
-  testTree.insert(std::make_pair(1, 8));
+  testTree.insert(std::make_pair(0, 8));
   testTree.print();
-  testTree.insert(std::make_pair(2, 159));
+  testTree.insert(std::make_pair(1, 159));
   testTree.print();
 
 
