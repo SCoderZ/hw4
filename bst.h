@@ -347,13 +347,17 @@ typename BinarySearchTree<Key, Value>::iterator&
 BinarySearchTree<Key, Value>::iterator::operator++()
 {
     // TODO
-  Node<Key, Value>* tmp = current_ -> getRight();
+  if (current_ -> getRight() != nullptr) {
+    Node<Key, Value>* tmp = current_ -> getRight();
 
-  while (tmp -> getLeft() != nullptr) {
-    tmp = tmp -> getLeft();
+    while (tmp -> getLeft() != nullptr) {
+      tmp = tmp -> getLeft();
+    }
+
+    current_ = tmp;
+  } else {
+    current_ = nullptr;
   }
-
-  current_ = tmp;
   return *this;
 }
 
@@ -521,6 +525,7 @@ void BinarySearchTree<Key, Value>::remove(const Key& key)
   if (!empty()) {
     Node<Key, Value>* curr = root_;
 
+    // TODO: replace with  curr != nullptr  ?
     while (curr->getLeft() != nullptr || curr->getRight()!= nullptr) {
       if (curr -> getKey() == key) {
         if (curr -> getLeft() != nullptr && curr -> getRight() != nullptr) {
@@ -538,10 +543,9 @@ void BinarySearchTree<Key, Value>::remove(const Key& key)
           nodeSwap(curr, curr -> getLeft());
           delete curr;
         } else {
-        delete curr;
-      }
-
-      } else if (curr -> getKey() < key) {
+          delete curr;
+        }
+      } else if (curr -> getKey() > key) {
         curr = curr -> getLeft();
       } else {
         curr = curr -> getRight();
@@ -578,7 +582,7 @@ void BinarySearchTree<Key, Value>::clear()
 {
   Node<Key, Value>* curr = root_;
 
-  while (!empty()) {
+  while (!empty() && curr != nullptr) {
     while (curr -> getRight() != nullptr) {
       curr = curr -> getRight();
     }
@@ -618,20 +622,29 @@ Node<Key, Value>* BinarySearchTree<Key, Value>::internalFind(const Key& key) con
   if (!empty()) {
     Node<Key, Value>* curr = root_;
 
-    while (curr -> getLeft() != nullptr || curr -> getRight()!= nullptr) {
+    // edge case
+    if (curr -> getKey() == key) {
+      return curr;
+    } 
+
+    while (curr != nullptr) {
       if (curr -> getKey() == key) {
         return curr;
-      } else if (curr -> getKey() < key) {
-        curr = curr -> getLeft();
+      } else if (curr -> getKey() > key) {
+        if (curr -> getLeft() != nullptr) {
+          curr = curr -> getLeft();
+        } else return NULL;
       } else {
-        curr = curr -> getRight();
+        if (curr -> getRight() != nullptr) {
+          curr = curr -> getRight();
+        } else return NULL;
       }
     }
 
-    return nullptr;
+    return NULL;
 
   }
-  return nullptr;
+  return NULL;
 }
 
 template<typename Key, typename Value>
