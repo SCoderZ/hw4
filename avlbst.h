@@ -149,7 +149,7 @@ protected:
 template<class Key, class Value>
 void AVLTree<Key, Value>::removeFix (AVLNode<Key, Value>* n, int diff) {
   if (n == nullptr) return;
-  AVLNode<Key, Value> p = n -> getParent();
+  AVLNode<Key, Value>* p = n -> getParent();
 
   if (p != nullptr) {
     int ndiff;
@@ -160,7 +160,7 @@ void AVLTree<Key, Value>::removeFix (AVLNode<Key, Value>* n, int diff) {
     }
     if (diff == -1) {
       if (n -> getBalance() += diff == -2) {
-        AVLNode<Key, Value> c = n -> getLeft();
+        AVLNode<Key, Value>* c = n -> getLeft();
         if (c -> getBalnce() == -1) {
           rotateRight(n);
           n -> setBalance(0);
@@ -171,7 +171,7 @@ void AVLTree<Key, Value>::removeFix (AVLNode<Key, Value>* n, int diff) {
           n -> setBalance(-1);
           c -> setBalance(1);
         } else if (c -> getBalance() == 1) {
-          AVLNode<Key, Value> g = c -> getRight();
+          AVLNode<Key, Value>* g = c -> getRight();
           rotateLeft(c);
           rotateRight(n);
           if (g -> getBalance() == 1) {
@@ -197,7 +197,7 @@ void AVLTree<Key, Value>::removeFix (AVLNode<Key, Value>* n, int diff) {
       }
     } else if (diff == 1) {
       if (n -> getBalance() += diff == +2) {
-        AVLNode<Key, Value> c = n -> getRight();
+        AVLNode<Key, Value>* c = n -> getRight();
         if (c -> getBalnce() == +1) {
           rotateLeft(n);
           n -> setBalance(0);
@@ -208,7 +208,7 @@ void AVLTree<Key, Value>::removeFix (AVLNode<Key, Value>* n, int diff) {
           n -> setBalance(+1);
           c -> setBalance(-1);
         } else if (c -> getBalance() == -1) {
-          AVLNode<Key, Value> g = c -> getLeft();
+          AVLNode<Key, Value>* g = c -> getLeft();
           rotateRight(c);
           rotateLeft(n);
           if (g -> getBalance() == -1) {
@@ -283,9 +283,9 @@ bool AVLTree<Key, Value>::isRightChild (AVLNode<Key, Value>* n) // n must have a
 template<class Key, class Value>
 void AVLTree<Key, Value>::rotateRight (AVLNode<Key, Value>* n) // n must have a parent and a left child
 {
-  AVLNode<Key, Value> p = n -> getParent();
-  AVLNode<Key, Value> x = n -> getLeft();
-  AVLNode<Key, Value> b = x -> getRight();
+  AVLNode<Key, Value>* p = n -> getParent();
+  AVLNode<Key, Value>* x = n -> getLeft();
+  AVLNode<Key, Value>* b = x -> getRight();
   if (!isRightChild(n)) {
     p -> setLeft(x); 
   } else {
@@ -303,9 +303,9 @@ void AVLTree<Key, Value>::rotateRight (AVLNode<Key, Value>* n) // n must have a 
 template<class Key, class Value>
 void AVLTree<Key, Value>::rotateLeft (AVLNode<Key, Value>* n) // n must have a parent and a right child
 {
-  AVLNode<Key, Value> p = n -> getParent();
-  AVLNode<Key, Value> x = n -> getRight();
-  AVLNode<Key, Value> b = x -> getLeft();
+  AVLNode<Key, Value>* p = n -> getParent();
+  AVLNode<Key, Value>* x = n -> getRight();
+  AVLNode<Key, Value>* b = x -> getLeft();
   if (!isRightChild(n)) {
     p -> setLeft(x); 
   } else {
