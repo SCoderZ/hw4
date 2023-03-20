@@ -756,11 +756,13 @@ int height(Node<Key, Value> * node) {
 template<typename Key, typename Value>
 bool isAVL(Node<Key, Value> * root)
 {
-  if (abs(height(root -> getLeft()) - height(root -> getRight())) <= 1) {
-    return isAVL(root -> getLeft()) && isAVL(root -> getLeft());
-  } else return false;
+  if (root == nullptr) return true;
 
-  return true;
+  if (abs(height(root -> getLeft()) - height(root -> getRight())) <= 1 && (isAVL(root -> getLeft()) && isAVL(root ->getRight()))) {
+    return true;
+  } 
+
+  return false;
 }
 
 /**
