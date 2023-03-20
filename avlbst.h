@@ -364,7 +364,7 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
         AVLNode<Key, Value>* newAVLNode = new AVLNode<Key, Value>(new_item.first, new_item.second, curr);
         curr -> setRight(newAVLNode);
         if (curr -> getBalance() == 0) {
-          curr -> setBalance(-1);
+          curr -> setBalance(1);
           insertFix(curr, newAVLNode); 
         }
         return;
