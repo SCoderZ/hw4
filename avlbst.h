@@ -441,7 +441,7 @@ void AVLTree<Key, Value>:: remove(const Key& key)
             tmp = nullptr;
             return;
           } else {
-            AVLNode<Key, Value>* tmp = this -> root_ -> getRight();
+            AVLNode<Key, Value>* tmp = static_cast<AVLNode<Key, Value>*>(this -> root_ -> getRight());
             tmp -> setParent(nullptr);
             delete this -> root_;
             this -> root_ = tmp;
@@ -468,7 +468,7 @@ void AVLTree<Key, Value>:: remove(const Key& key)
             tmp = nullptr;
             return;
           } else {
-            AVLNode<Key, Value>* tmp = this -> root_ -> getLeft();
+            AVLNode<Key, Value>* tmp = static_cast<AVLNode<Key, Value>*>(this -> root_ -> getLeft());
             tmp -> setParent(nullptr);
             delete this -> root_;
             this -> root_ = tmp;
