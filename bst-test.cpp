@@ -43,13 +43,26 @@ int main(int argc, char *argv[])
     }
     cout << "Erasing b" << endl;
     at.remove('b'); */
- BinarySearchTree<int, double> bst;
-        bst.insert(std::make_pair(1, 1.0));
-        bst.insert(std::make_pair(2, 1.0));
-        bst.insert(std::make_pair(3, 1.0));
-        bst.remove(1);
+ BinarySearchTree<uint16_t, uint16_t> testTree;
 
-  bst.print();
+        testTree.insert(std::make_pair(5, 8));
+        testTree.print();
+        testTree.insert(std::make_pair(3, 159));
+        testTree.print();
+        testTree.insert(std::make_pair(1, 9));
+        testTree.print();
+        testTree.insert(std::make_pair(10, 0x5a));
+        testTree.print();
+        testTree.insert(std::make_pair(15, 0xb));
+        testTree.print();
+        testTree.insert(std::make_pair(2, 4));
+        testTree.print();
+        testTree.insert(std::make_pair(4, 159));
+        testTree.print();
+
+        // EXPECT_TRUE(verifyBST(testTree, std::set<uint16_t>({5, 3, 1, 10, 15, 2, 4})));
+
+  testTree.print();
 
 
   return 0;

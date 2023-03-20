@@ -530,6 +530,11 @@ void BinarySearchTree<Key, Value>::remove(const Key& key)
         Node<Key, Value>* tmp = root_;
         Node<Key, Value>* pred = predecessor(tmp);
         nodeSwap(tmp, pred);
+        if (tmp -> getKey() < tmp -> getParent() -> getKey()) {
+          tmp -> getParent() -> setLeft(nullptr);
+        } else {
+          tmp -> getParent() -> setRight(nullptr);
+        }
         delete tmp;
         root_ = pred;
         return;
@@ -636,7 +641,7 @@ void BinarySearchTree<Key, Value>::clear()
     return;
   }
 
-  /* Node<Key, Value>* curr = root_;
+  Node<Key, Value>* curr = root_;
 
   while (curr -> getRight() != nullptr) {
     curr = curr -> getRight();
@@ -649,10 +654,10 @@ void BinarySearchTree<Key, Value>::clear()
     if (curr == nullptr) {
       return;
     }
-  } */
-  while (!empty()) {
-    remove(root_->getKey());
   }
+  /* while (!empty()) {
+    remove(root_->getKey());
+  } */
 }
 
 
