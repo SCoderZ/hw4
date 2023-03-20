@@ -333,7 +333,7 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
     return;
   }
 
-  Node<Key, Value>* curr = this -> root_;
+  AVLNode<Key, Value>* curr = this -> root_;
 
   // edge case when curr is the root and has no children
   if (curr -> getKey() == new_item.first) {
