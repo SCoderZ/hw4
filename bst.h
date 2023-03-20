@@ -634,7 +634,7 @@ void BinarySearchTree<Key, Value>::clear()
     return;
   }
 
-  Node<Key, Value>* curr = root_;
+  /* Node<Key, Value>* curr = root_;
 
   while (curr -> getRight() != nullptr) {
     curr = curr -> getRight();
@@ -645,9 +645,11 @@ void BinarySearchTree<Key, Value>::clear()
     curr = predecessor(curr);
     remove(tmp->getKey());
     if (curr == nullptr) {
-      root_ = nullptr;
       return;
     }
+  } */
+  while (!empty()) {
+    remove(root_->getKey());
   }
 }
 
