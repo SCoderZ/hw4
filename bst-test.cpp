@@ -43,11 +43,14 @@ int main(int argc, char *argv[])
     }
     cout << "Erasing b" << endl;
     at.remove('b'); */
+ BinarySearchTree<int, double> bst;
+        bst.insert(std::make_pair(1, 1.0));
+        bst.insert(std::make_pair(2, 1.0));
+        bst.insert(std::make_pair(3, 1.0));
+        bst.remove(1);
+
+  bst.print();
 
 
- BinarySearchTree<uint16_t, uint16_t> testTree;
-
-        testTree.insert(std::make_pair(1, 9));
-        testTree.insert(std::make_pair(0, 8));
   return 0;
 }

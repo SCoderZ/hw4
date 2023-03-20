@@ -526,9 +526,27 @@ void BinarySearchTree<Key, Value>::remove(const Key& key)
 
 
     if (root_ -> getKey() == key) {
-      delete root_;
-      root_ = nullptr;
-      return;
+      if (root_ -> getLeft() != nullptr && root_ -> getRight() != nullptr) {
+        nodeSwap(root_, predecessor(root_));
+        delete root_;
+        root_ = nullptr;
+        return;
+      } else if (root_ -> getLeft() == nullptr && root_ -> getRight() != nullptr) { // Promote single child case
+        Node<Key, Value>* tmp = root_;
+        root_ = root_-> getRight();
+        delete tmp;
+        return;
+      } else if (root_ -> getLeft() != nullptr && root_ -> getRight() == nullptr) {
+        Node<Key, Value>* tmp = root_;
+        root_ = root_-> getLeft();
+        delete tmp;
+        return;
+      } else {
+        delete root_;
+        root_ = nullptr;
+        return;
+      }
+
     } 
 
     Node<Key, Value>* curr = root_;
@@ -544,22 +562,25 @@ void BinarySearchTree<Key, Value>::remove(const Key& key)
           delete curr;
           return;
         } else if (curr -> getLeft() == nullptr && curr -> getRight() != nullptr) {
-          nodeSwap(curr, curr -> getRight());
+          Node<Key, Value>* tmp = curr;
+
+          // curr = curr -> getRight();
+
           if (curr -> getKey() < curr -> getParent() -> getKey()) {
-            curr -> getParent() -> setLeft(nullptr);
+            curr -> getParent() -> setLeft(curr->getRight());
           } else {
-            curr -> getParent() -> setRight(nullptr);
+            curr -> getParent() -> setRight(curr->getRight());
           }
-          delete curr;
+          delete tmp;
           return;
-        } else if (curr -> getLeft() == nullptr && curr -> getRight() != nullptr) {
-          nodeSwap(curr, curr -> getLeft());
+        } else if (curr -> getLeft() != nullptr && curr -> getRight() == nullptr) {
+          Node<Key, Value>* tmp = curr;
           if (curr -> getKey() < curr -> getParent() -> getKey()) {
-            curr -> getParent() -> setLeft(nullptr);
+            curr -> getParent() -> setLeft(curr->getLeft());
           } else {
-            curr -> getParent() -> setRight(nullptr);
+            curr -> getParent() -> setRight(curr->getLeft());
           }
-          delete curr;
+          delete tmp;
           return;
         } else {
           if (curr -> getKey() < curr -> getParent() -> getKey()) {
