@@ -527,9 +527,11 @@ void BinarySearchTree<Key, Value>::remove(const Key& key)
 
     if (root_ -> getKey() == key) {
       if (root_ -> getLeft() != nullptr && root_ -> getRight() != nullptr) {
-        nodeSwap(root_, predecessor(root_));
-        delete root_;
-        root_ = nullptr;
+        Node<Key, Value>* tmp = root_;
+        Node<Key, Value>* pred = predecessor(tmp);
+        nodeSwap(tmp, pred);
+        delete tmp;
+        root_ = pred;
         return;
       } else if (root_ -> getLeft() == nullptr && root_ -> getRight() != nullptr) { // Promote single child case
         Node<Key, Value>* tmp = root_;
