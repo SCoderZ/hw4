@@ -529,17 +529,22 @@ void BinarySearchTree<Key, Value>::remove(const Key& key)
       if (root_ -> getLeft() != nullptr && root_ -> getRight() != nullptr) {
         Node<Key, Value>* tmp = root_;
         Node<Key, Value>* pred = predecessor(tmp);
+
         nodeSwap(tmp, pred);
-        if (tmp -> getKey() < tmp -> getParent() -> getKey()) {
-          tmp -> getParent() -> setLeft(nullptr);
+        if (pred -> getParent() != nullptr) {
+          if (pred -> getKey() < pred -> getParent() -> getKey()) {
+            pred -> getParent() -> setLeft(nullptr);
+          } else {
+            pred -> getParent() -> setRight(nullptr);
+          }
+          delete pred;
+          root_ = tmp;
+          return;
         } else {
-          tmp -> getParent() -> setRight(nullptr);
+
         }
-        delete tmp;
-        root_ = pred;
-        return;
       } else if (root_ -> getLeft() == nullptr && root_ -> getRight() != nullptr) { // Promote single child case
-        Node<Key, Value>* tmp = root_;
+      Node<Key, Value>* tmp = root_;
         root_ = root_-> getRight();
         delete tmp;
         return;
@@ -618,15 +623,22 @@ template<class Key, class Value>
 Node<Key, Value>*
 BinarySearchTree<Key, Value>::predecessor(Node<Key, Value>* current)
 {
-  if (current -> getLeft() == nullptr) {
-    return nullptr;
-  } else {
+
+  if (current -> getLeft() != nullptr){
     Node<Key, Value>* tmp = current -> getLeft();
+
     while (tmp -> getRight() != nullptr) {
-      tmp = tmp ->getRight();
+        tmp = tmp -> getRight();
     }
     return tmp;
   }
+
+  Node<Key, Value>* ancestor = current -> getParent();
+  while (ancestor != nullptr && current == ancestor ->getLeft()) {
+    current = ancestor;
+    ancestor = ancestor -> getParent();
+  }
+  return ancestor;
 }
 
 
@@ -637,7 +649,7 @@ BinarySearchTree<Key, Value>::predecessor(Node<Key, Value>* current)
 template<typename Key, typename Value>
 void BinarySearchTree<Key, Value>::clear()
 {
-  if (empty()) {
+  /* if (empty()) {
     return;
   }
 
@@ -654,10 +666,12 @@ void BinarySearchTree<Key, Value>::clear()
     if (curr == nullptr) {
       return;
     }
-  }
-  /* while (!empty()) {
-    remove(root_->getKey());
   } */
+  while (!empty()) {
+    Key k = root_ -> getKey();
+    
+    remove(k);
+  }
 }
 
 
