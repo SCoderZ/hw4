@@ -636,15 +636,16 @@ void BinarySearchTree<Key, Value>::clear()
 
   Node<Key, Value>* curr = root_;
 
-  while (!empty()) {
-    while (curr -> getRight() != nullptr) {
-      curr = curr -> getRight();
-    }
+  while (curr -> getRight() != nullptr) {
+    curr = curr -> getRight();
+  }
 
+  while (!empty()) {
     Node<Key, Value>* tmp = curr;
     curr = predecessor(curr);
     remove(tmp->getKey());
     if (curr == nullptr) {
+      root_ = nullptr;
       return;
     }
   }
