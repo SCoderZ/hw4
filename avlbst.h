@@ -333,7 +333,7 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
     return;
   }
 
-  AVLNode<Key, Value>* curr = this -> root_;
+  Node<Key, Value>* curr = this -> root_;
 
   // edge case when curr is the root and has no children
   if (curr -> getKey() == new_item.first) {
@@ -391,7 +391,7 @@ template<class Key, class Value>
 void AVLTree<Key, Value>:: remove(const Key& key)
 {
   if (!(this -> empty())) {
-    AVLNode<Key, Value>* curr = this -> root_;
+    Node<Key, Value>* curr = this -> root_;
     while (curr != nullptr) {
       if (curr -> getKey() == key) {
         if (curr -> getLeft() != nullptr && curr -> getRight() != nullptr) {
@@ -441,7 +441,7 @@ void AVLTree<Key, Value>:: remove(const Key& key)
             tmp = nullptr;
             return;
           } else {
-            AVLNode<Key, Value>* tmp = this -> root_ -> getRight();
+            Node<Key, Value>* tmp = this -> root_ -> getRight();
             tmp -> setParent(nullptr);
             delete this -> root_;
             this -> root_ = tmp;
@@ -468,7 +468,7 @@ void AVLTree<Key, Value>:: remove(const Key& key)
             tmp = nullptr;
             return;
           } else {
-            AVLNode<Key, Value>* tmp = this -> root_ -> getLeft();
+            Node<Key, Value>* tmp = this -> root_ -> getLeft();
             tmp -> setParent(nullptr);
             delete this -> root_;
             this -> root_ = tmp;
