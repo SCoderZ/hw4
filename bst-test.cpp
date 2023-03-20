@@ -60,11 +60,22 @@ int main(int argc, char *argv[])
         testTree.insert(std::make_pair(4, 159));
         testTree.print(); */
 
- BinarySearchTree<int, double> bst;
+ /* BinarySearchTree<int, double> bst;
         bst.insert(std::make_pair(2, 1.0));
         bst.insert(std::make_pair(1, 1.0));
         bst.insert(std::make_pair(3, 1.0));
-        bst.remove(2);
+        bst.remove(2); */
+BinarySearchTree<uint16_t, uint16_t> testTree;
+
+        testTree.insert(std::make_pair(5, 8));
+        testTree.insert(std::make_pair(3, 159));
+        testTree.insert(std::make_pair(1, 9));
+        testTree.insert(std::make_pair(3, 0x5a));
+        testTree.insert(std::make_pair(15, 0xb));
+        testTree.insert(std::make_pair(1, 4));
+        testTree.insert(std::make_pair(3, 159));
+
+        // EXPECT_TRUE(verifyBST(testTree, std::set<uint16_t>({5, 3, 1, 15})));
 
         // EXPECT_TRUE(verifyBST(bst, {1, 3}));
 
