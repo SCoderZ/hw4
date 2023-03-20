@@ -9,7 +9,7 @@ using namespace std;
 int main(int argc, char *argv[])
 {
     // Binary Search Tree tests
-    BinarySearchTree<char,int> bt;
+    /* BinarySearchTree<char,int> bt;
     bt.insert(std::make_pair('a',1));
     bt.insert(std::make_pair('b',2));
     
@@ -42,11 +42,12 @@ int main(int argc, char *argv[])
         cout << "Did not find b" << endl;
     }
     cout << "Erasing b" << endl;
-    at.remove('b');
+    at.remove('b'); */
 
 
-  /* BinarySearchTree<std::string, std::string> testTree;
+ BinarySearchTree<uint16_t, uint16_t> testTree;
 
-  testTree.insert(std::make_pair("Hello World", "!!!")); */
+        testTree.insert(std::make_pair(1, 9));
+        testTree.insert(std::make_pair(0, 8));
   return 0;
 }
