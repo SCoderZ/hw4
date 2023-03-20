@@ -75,6 +75,8 @@ BinarySearchTree<uint16_t, uint16_t> testTree;
         testTree.insert(std::make_pair(1, 4));
         testTree.insert(std::make_pair(3, 159));
 
+
+
         // EXPECT_TRUE(verifyBST(testTree, std::set<uint16_t>({5, 3, 1, 15})));
 
         // EXPECT_TRUE(verifyBST(bst, {1, 3}));
