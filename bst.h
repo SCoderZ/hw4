@@ -557,11 +557,15 @@ template<class Key, class Value>
 Node<Key, Value>*
 BinarySearchTree<Key, Value>::predecessor(Node<Key, Value>* current)
 {
-  Node<Key, Value>* tmp = current -> getLeft();
-  while (tmp -> getRight() != nullptr) {
-    tmp = tmp ->getRight();
+  if (current -> getLeft() == nullptr) {
+    return nullptr;
+  } else {
+    Node<Key, Value>* tmp = current -> getLeft();
+    while (tmp -> getRight() != nullptr) {
+      tmp = tmp ->getRight();
+    }
+    return tmp;
   }
-  return tmp;
 }
 
 
