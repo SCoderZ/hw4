@@ -630,9 +630,13 @@ BinarySearchTree<Key, Value>::predecessor(Node<Key, Value>* current)
 template<typename Key, typename Value>
 void BinarySearchTree<Key, Value>::clear()
 {
+  if (empty()) {
+    return;
+  }
+
   Node<Key, Value>* curr = root_;
 
-  while (!empty() && curr != nullptr) {
+  while (!empty()) {
     while (curr -> getRight() != nullptr) {
       curr = curr -> getRight();
     }
@@ -640,6 +644,9 @@ void BinarySearchTree<Key, Value>::clear()
     Node<Key, Value>* tmp = curr;
     curr = predecessor(curr);
     remove(tmp->getKey());
+    if (curr == nullptr) {
+      return;
+    }
   }
 }
 
