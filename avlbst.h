@@ -159,7 +159,7 @@ void AVLTree<Key, Value>::removeFix (AVLNode<Key, Value>* n, int diff) {
       ndiff = -1;
     }
     if (diff == -1) {
-      if (n -> getBalance() += diff == -2) {
+      if (n -> getBalance() + diff == -2) {
         AVLNode<Key, Value>* c = n -> getLeft();
         if (c -> getBalance() == -1) {
           rotateRight(n);
@@ -196,7 +196,7 @@ void AVLTree<Key, Value>::removeFix (AVLNode<Key, Value>* n, int diff) {
         removeFix(p, ndiff);
       }
     } else if (diff == 1) {
-      if (n -> getBalance() += diff == +2) {
+      if (n -> getBalance() + diff == +2) {
         AVLNode<Key, Value>* c = n -> getRight();
         if (c -> getBalance() == +1) {
           rotateLeft(n);
