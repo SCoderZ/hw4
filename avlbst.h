@@ -443,30 +443,58 @@ void AVLTree<Key, Value>:: remove(const Key& key)
       if (curr -> getKey() == key) {
         if (curr -> getLeft() != nullptr && curr -> getRight() != nullptr) {
           AVLNode<Key, Value>* pred = static_cast<AVLNode<Key, Value>*>(this -> predecessor(curr));
-          nodeSwap(curr, pred);
-          AVLNode<Key, Value>* child = curr -> getLeft();
+          // AVLNode<Key, Value>* child = curr -> getLeft();
           AVLNode<Key, Value>* parent = curr -> getParent();
           int diff;
+
+          if (parent != nullptr) {
+            if (!isRightChild(curr)) {
+              if (!isRightChild(pred)) {
+                nodeSwap(curr, pred);
+                curr -> getParent() -> setLeft(nullptr);
+              } else {
+                nodeSwap(curr, pred);
+                curr -> getParent() -> setRight(nullptr);
+              }
+              diff = 1;
+            } else {
+              if (!isRightChild(pred)) {
+                nodeSwap(curr, pred);
+                curr -> getParent() -> setLeft(nullptr);
+              } else {
+                nodeSwap(curr, pred);
+                curr -> getParent() -> setRight(nullptr);
+              }
+              diff = -1;
+            }
+          } 
+          nodeSwap(curr, pred);
+          delete curr;
+          curr = nullptr;
+          removeFix(parent, diff);
+          return;
+          /* else {
+            delete curr;
+            curr = nullptr;
+            removeFix(parent, diff);
+            return;
+          } */
+
+/*
           if (pred -> getKey() <= parent -> getKey()) { // curr is at the left child pos
             parent -> setLeft(child);
             diff = 1;
-            parent -> setBalance(parent -> getBalance() + 1);
             if (child != nullptr) {
               child -> setParent(parent);
             }
           } else { // curr is right child
             parent -> setRight(child);
-            parent -> setBalance(parent -> getBalance() - 1);
             diff = -1;
             if (child != nullptr) {
               child -> setParent(parent);
             }
-          }
+          } */
           
-          delete curr;
-          curr = nullptr;
-          removeFix(parent, diff);
-          return;
         } else if (curr -> getLeft() == nullptr && curr -> getRight() != nullptr) {
           AVLNode<Key, Value>* tmp = curr;
           AVLNode<Key, Value>* child = curr -> getRight();
