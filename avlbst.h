@@ -254,6 +254,7 @@ void AVLTree<Key, Value>::insertFix (AVLNode<Key, Value>* p, AVLNode<Key, Value>
         rotateLeft(p);
         rotateRight(g);
       }
+      g -> setBalance(0);
     }
   } else {
     g -> setBalance(g -> getBalance() + 1);
@@ -268,6 +269,7 @@ void AVLTree<Key, Value>::insertFix (AVLNode<Key, Value>* p, AVLNode<Key, Value>
         rotateRight(p);
         rotateLeft(g);
       }
+      g -> setBalance(0);
     }
   }
 }
@@ -345,7 +347,6 @@ void AVLTree<Key, Value>::rotateLeft (AVLNode<Key, Value>* z) // n must have a p
 template<class Key, class Value>
 void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
 {
-
   if (this -> empty())  {
     this -> root_ = new AVLNode<Key, Value>(new_item.first, new_item.second, nullptr);
     return;
@@ -372,7 +373,12 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
         if (curr -> getBalance() == 0) {
           curr -> setBalance(-1);
           insertFix(curr, newAVLNode);
+        } else if (curr -> getBalance() == -1) {
+          curr -> setBalance(0);
+        } else if (curr -> getBalance() == 1) {
+          curr -> setBalance(0);
         }
+
         return;
       }
     } else {
@@ -381,22 +387,45 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
       } else {
         AVLNode<Key, Value>* newAVLNode = new AVLNode<Key, Value>(new_item.first, new_item.second, curr);
         curr -> setRight(newAVLNode);
-        if (curr -> getBalance() == 0) {
+        if (curr -> getBalance() == 0){
           curr -> setBalance(1);
           insertFix(curr, newAVLNode); 
+        } else if (curr -> getBalance() == -1) {
+          curr -> setBalance(0);
+        } else if (curr -> getBalance() == 1) {
+          curr -> setBalance(0);
         }
+
         return;
       }
     }
   }
 
-  if (new_item.first <= curr -> getKey()) {
+  /* if (new_item.first <= curr -> getKey()) {
     AVLNode<Key, Value>* newAVLNode = new AVLNode<Key, Value>(new_item.first, new_item.second, curr);
     curr -> setLeft(newAVLNode);
+    if (curr -> getBalance() == 0) {
+      curr -> setBalance(-1);
+      insertFix(curr, newAVLNode);
+    } else if (curr -> getBalance() == -1) {
+      curr -> setBalance(0);
+    } else if (curr -> getBalance() == 1) {
+      curr -> setBalance(0);
+    }
+
   } else {
     AVLNode<Key, Value>* newAVLNode = new AVLNode<Key, Value>(new_item.first, new_item.second, curr);
     curr -> setRight(newAVLNode);
-  }
+    if (curr -> getBalance() == 0) {
+      curr -> setBalance(1);
+      insertFix(curr, newAVLNode); 
+    } else if (curr -> getBalance() == -1) {
+      curr -> setBalance(0);
+    } else if (curr -> getBalance() == 1) {
+      curr -> setBalance(0);
+    }
+
+  } */
 
     // TODO
 }
